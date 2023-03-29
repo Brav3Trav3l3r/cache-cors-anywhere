@@ -3,7 +3,7 @@ const corsAnywhere = require('cors-anywhere');
 const express = require('express');
 const apicache = require('apicache');
 const expressHttpProxy = require('express-http-proxy');
-const CORS_PROXY_PORT = 5000;
+const CORS_PROXY_PORT = 5003;
 // Create CORS Anywhere server
 corsAnywhere.createServer({}).listen(CORS_PROXY_PORT, () => {
   console.log(
@@ -17,7 +17,7 @@ app.get('/*', cacheMiddleware());
 app.options('/*', cacheMiddleware());
 // Proxy to CORS server when request misses cache
 app.use(expressHttpProxy(`localhost:${CORS_PROXY_PORT}`));
-const APP_PORT = process.env.PORT || 8080;
+const APP_PORT = 8888;
 app.listen(APP_PORT, () => {
   console.log(`External CORS cache server started at port ${APP_PORT}`);
 });
